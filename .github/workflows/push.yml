@@ -15,3 +15,12 @@ jobs:
             tag_with_ref: true
             tag_with_sha: true
             tags: ${{ github.sha }}
+	- name: kubectl - Google Cloud GKE cluster.
+      	uses: ameydev/gke-kubectl-action@master
+      	env:
+       	  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+          CLUSTER_NAME: ${{ secrets.GKE_CLUSTER_NAME }}
+          ZONE_NAME: us-central1-c
+      	with:
+          args: apply -f packaging/k8s/manifests/ -n staging
