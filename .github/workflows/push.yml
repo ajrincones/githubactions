@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: build and push to docker
-      uses: actions/docker-build-push-gcr-update-gke-deployment-action@master
+      uses: shashank0202/docker-build-push-gcr-update-gke-deployment-action@master
       with:
         service_account: ${{ secrets.GCLOUD_AUTH}} 
         zone: 'us-central1-c'
