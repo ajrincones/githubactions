@@ -1,19 +1,16 @@
-name: Build and Push
-on: 
-  push:
-      branches:    
-          - master
+on: push
+name: deploy
 jobs:
-  build_publish_gcr:
+  build-and-push:
+    name: build and push image
     runs-on: ubuntu-latest
     steps:
-  - name: Checkout code
-    uses: actions/checkout@v2
-  - name: Build and push Docker images
-    uses: docker/build-push-action@v1
-    with:
-      username: _json_key
-      password: ${{ secrets.DOCKER_PASSWORD }}
-      registry: gcr.io
-      repository: myorg/myrepository
-      tags: latest
+    - uses: actions/checkout@master
+    - name: build and push to docker
+      uses: docker/build-push-action@v2
+      with:
+        username: _json_key
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        registry: gcr.io
+        repository: ${{ github.repository }}
+        tag: latest
