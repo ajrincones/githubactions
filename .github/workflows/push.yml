@@ -5,13 +5,16 @@ jobs:
     name: build and push image
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Build and push Docker images
-      uses: docker/build-push-action@master
-      with:
-        username: _json_key
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: gcr.io
-        repository: ajrincones/gha
-        tags: latest
+    - uses: actions/checkout@master
+    - name: build and push to docker
+      uses: actions/docker-build-push-gcr-update-gke-deployment-action@master
+        with:
+          service_account: ${{ secrests.GCLOUD_AUTH}} 
+          zone: 'us-central1-c'
+          project_id: 'banded-arcana-310122'
+          registry: 'gcr.io'
+          image_name: 'gha'
+          cluster: 'sd-cluster'
+          namespace: 'dev'
+          deployment: 'front-end-dep'
+          container: 'front-end'
