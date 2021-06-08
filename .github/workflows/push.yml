@@ -9,6 +9,6 @@ jobs:
     - name: build and push to docker
       uses: docker/build-push-action@v1
       with:
-        username: _json_key
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: gcr.io
+      username: _json_key
+      password: ${{ secrets.DOCKER_PASSWORD }}
+      registry: gcr.io
