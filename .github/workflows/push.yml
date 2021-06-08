@@ -7,11 +7,14 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: build and push to docker
-      uses: docker/build-push-action@v1
-      with:
-        username: _json_key
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        registry: gcr.io
-
-#Pruebas
-#
+      uses: actions/docker-build-push-gcr-update-gke-deployment-action@v1.4
+        with:
+          service_account: ${{ secrests.GCLOUD_AUTH}} 
+          zone: 'us-central1-c'
+          project_id: 'banded-arcana-310122'
+          registry: 'gcr.io'
+          image_name: 'gha'
+          cluster: 'sd-cluster'
+          namespace: 'dev'
+          deployment: 'front-end-dep'
+          container: 'front-end'
