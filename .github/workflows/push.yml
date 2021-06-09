@@ -15,7 +15,6 @@ jobs:
         registry: 'gcr.io'
         image_name: 'gha'
         cluster: 'sd-cluster'
-        namespace: 'dev'
-        deployment: 'front-end-dep'
+        namespace: 'kube-system'
+        deployment: 'l7-default-backend'
         container: 'front-end'
-#gcr.io
